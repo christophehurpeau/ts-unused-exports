@@ -21,17 +21,16 @@ import { resolve } from 'path';
 
 import path = require('path');
 
-const cleanFilename = (pathIn: string): string => {
-  const nameOnly = path.parse(pathIn).name;
-  const nameOnlyWithoutIndex = nameOnly.replace(/([\\/])index\.[^.]*$/, '');
-
+var cleanFilename = function (pathIn, extraOptions) {
+  var nameOnly = path.parse(pathIn).name;
+  var nameOnlyWithoutIndex = nameOnly.replace(/([\\/])index\.[^.]*$/, '');
   // Imports always have the '.d' part dropped from the filename,
   // so for the export counting to work with d.ts files, we need to also drop '.d' part.
   // Assumption: the same folder will not contain two files like: a.ts, a.d.ts.
   if (!!nameOnlyWithoutIndex.match(/\.d$/)) {
+    if (extraOptions.keepIndexInFileNames) return nameOnlyWithoutIndex;
     return nameOnlyWithoutIndex.substr(0, nameOnly.length - 2);
   }
-
   return nameOnlyWithoutIndex;
 };
 
@@ -43,7 +42,7 @@ const pathWithoutExtension = (pathIn: string, extraOptions?: ExtraCommandLineOpt
     return parsed.dir;
   }
 
-  return path.join(parsed.dir, cleanFilename(pathIn));
+  return path.join(parsed.dir, cleanFilename(pathIn, extraOptions));
 };
 
 const mapFile = (
