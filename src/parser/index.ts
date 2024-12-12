@@ -36,10 +36,12 @@ const cleanFilename = (pathIn: string): string => {
 };
 
 // We remove extension, so that we can handle many different file types
-const pathWithoutExtension = (pathIn: string): string => {
+const pathWithoutExtension = (pathIn: string, extraOptions?: ExtraCommandLineOptions): string => {
   const parsed = path.parse(pathIn);
 
-  if (indexCandidates.some((i) => pathIn.endsWith(i))) return parsed.dir;
+  if (!extraOptions?.keepIndex && indexCandidates.some((i) => pathIn.endsWith(i))) {
+    return parsed.dir;
+  }
 
   return path.join(parsed.dir, cleanFilename(pathIn));
 };
@@ -90,7 +92,7 @@ const mapFile = (
   });
 
   return {
-    path: pathWithoutExtension(path),
+    path: pathWithoutExtension(path, extraOptions),
     fullPath: path,
     imports,
     exports: exportNames,
