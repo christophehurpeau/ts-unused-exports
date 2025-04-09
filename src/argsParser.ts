@@ -94,9 +94,6 @@ function processOptions(
       case '--findCompletelyUnusedFiles':
         newOptions.findCompletelyUnusedFiles = true;
         break;
-      case '--keepIndex':
-        newOptions.keepIndex = true;
-        break;
       default:
         throw new Error(`Not a recognised option '${optionName}'`);
     }
