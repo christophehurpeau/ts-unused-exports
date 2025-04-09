@@ -8,9 +8,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pzavolinsky/ts-unused-exports.git"
+    "url": "https://github.com/christophehurpeau/ts-unused-exports.git"
   },
-  "funding": "https://github.com/pzavolinsky/ts-unused-exports?sponsor=1",
+  "funding": "https://github.com/christophehurpeau/ts-unused-exports?sponsor=1",
   "keywords": [
     "typescript",
     "tslint",
@@ -20,9 +20,9 @@
   "author": "Patricio Zavolinsky",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pzavolinsky/ts-unused-exports/issues"
+    "url": "https://github.com/christophehurpeau/ts-unused-exports/issues"
   },
-  "homepage": "https://github.com/pzavolinsky/ts-unused-exports",
+  "homepage": "https://github.com/christophehurpeau/ts-unused-exports",
   "scripts": {
     "bump": "npm version patch",
     "build": "tsc",
@@ -70,6 +70,5 @@
     "typescript": {
       "optional": false
     }
-  },
-  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
+  }
 }

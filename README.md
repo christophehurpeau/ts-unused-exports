@@ -1,5 +1,7 @@
 # ts-unused-exports
 
+> This is a fork of original lib with https://github.com/pzavolinsky/ts-unused-exports/issues/316 but added as a feature not an option.
+
 `ts-unused-exports` finds unused exported symbols in your Typescript project.
 
 [![Build Status](https://github.com/pzavolinsky/ts-unused-exports/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/pzavolinsky/ts-unused-exports/actions/workflows/node.js.yml?query=branch%3Amaster)
