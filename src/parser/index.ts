@@ -13,7 +13,6 @@ import {
 import { FromWhat } from './common';
 import { addExportCore } from './export';
 import { addImportCore } from './import';
-import { indexCandidates } from './util';
 import { isNodeDisabledViaComment } from './comment';
 import { processNode } from './nodeProcessor';
 import { readFileSync } from 'fs';
@@ -21,28 +20,23 @@ import { resolve } from 'path';
 
 import path = require('path');
 
-var cleanFilename = function (pathIn, extraOptions) {
-  var nameOnly = path.parse(pathIn).name;
-  var nameOnlyWithoutIndex = nameOnly.replace(/([\\/])index\.[^.]*$/, '');
+const cleanFilename = function (pathIn: string): string {
+  const nameOnly = path.parse(pathIn).name;
+  const nameOnlyWithoutIndex = nameOnly.replace(/([\\/])index\.[^.]*$/, '');
   // Imports always have the '.d' part dropped from the filename,
   // so for the export counting to work with d.ts files, we need to also drop '.d' part.
   // Assumption: the same folder will not contain two files like: a.ts, a.d.ts.
   if (!!nameOnlyWithoutIndex.match(/\.d$/)) {
-    if (extraOptions.keepIndexInFileNames) return nameOnlyWithoutIndex;
-    return nameOnlyWithoutIndex.substr(0, nameOnly.length - 2);
+    return nameOnlyWithoutIndex;
   }
   return nameOnlyWithoutIndex;
 };
 
 // We remove extension, so that we can handle many different file types
-const pathWithoutExtension = (pathIn: string, extraOptions?: ExtraCommandLineOptions): string => {
+const pathWithoutExtension = (pathIn: string): string => {
   const parsed = path.parse(pathIn);
 
-  if (!extraOptions?.keepIndex && indexCandidates.some((i) => pathIn.endsWith(i))) {
-    return parsed.dir;
-  }
-
-  return path.join(parsed.dir, cleanFilename(pathIn, extraOptions));
+  return path.join(parsed.dir, cleanFilename(pathIn));
 };
 
 const mapFile = (
@@ -91,7 +85,7 @@ const mapFile = (
   });
 
   return {
-    path: pathWithoutExtension(path, extraOptions),
+    path: pathWithoutExtension(path),
     fullPath: path,
     imports,
     exports: exportNames,
