@@ -1,6 +1,6 @@
 {
   "name": "@chrp/ts-unused-exports",
-  "version": "11.1.0",
+  "version": "11.1.1",
   "description": "ts-unused-exports finds unused exported symbols in your Typescript project",
   "main": "lib/app.js",
   "publishConfig": {
